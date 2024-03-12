@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.challenge.murray.thomas.mapper.MealMapper">
+    <insert id="insertMeal" parameterType="com.challenge.murray.thomas.model.Meal">
+        INSERT INTO meals (user_id, meal_type, timestamp) VALUES (#{userId}, #{mealType}, #{timestamp})
+    </insert>
+
+    <select id="findMealsByUserId" parameterType="long" resultType="com.challenge.murray.thomas.model.Meal">
+        SELECT ID ,USER_ID as userId, MEAL_TYPE as mealType, TIMESTAMP  FROM MEALS WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateMeal" parameterType="com.challenge.murray.thomas.model.Meal">
+        UPDATE meals
+        SET meal_type = #{mealType},
+        timestamp = #{timestamp}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <delete id="deleteMealById" parameterType="long">
+        DELETE FROM meals WHERE id = #{id}
+    </delete>
+
+</mapper>
